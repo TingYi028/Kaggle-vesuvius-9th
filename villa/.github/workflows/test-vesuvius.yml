@@ -1,0 +1,42 @@
+name: Test vesuvius Python
+
+on:
+  pull_request:
+    paths:
+      - 'vesuvius/**'
+      - '.github/workflows/test-vesuvius.yml'
+
+jobs:
+  test-vesuvius-python:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+            # Limit the test matrix to ubuntu-latest for now, as other platforms may not
+            # support all dependencies yet.  Extend this list once the build scripts
+            # for macOS and Windows are confirmed.
+            os: [ubuntu-latest]
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./vesuvius
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Ensure curl available on Linux
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl
+
+      - name: Install uv
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Sync dependencies
+        run: uv sync --extra all
+
+      - name: Run tests
+        run: uv run pytest tests

@@ -1,0 +1,2 @@
+
+nnUNetv2_train 501 3d_192_group32_gelu 1  -p nnUNetResEncUNetMPlans -tr nnUNetTrainerMedialSurfaceRecall_MuSGD
