@@ -29,7 +29,13 @@ pip install -e ./villa/segmentation/models/arch/nnunet
 
 ```bash
 pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 \
---index-url https://download.pytorch.org/whl/cu129
+    --index-url https://download.pytorch.org/whl/cu129
+```
+
+### Install Numba
+
+```bash
+pip install numba
 ```
 
 ---
