@@ -137,3 +137,4 @@ chmod +x train_script.sh
 | Download data | `kaggle competitions download -c vesuvius-challenge-surface-detection` |
 | Preprocess | `nnUNetv2_plan_and_preprocess -d 501 -pl nnUNetPlannerResEncM ...` |
 | Train | `./train_script.sh` |
+
